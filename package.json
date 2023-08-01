@@ -1,0 +1,25 @@
+{
+  "name": "keeper-v4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon server",
+    "client": "npm run dev --prefix client",
+    "setup-project": "npm i && cd client && npm i",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \" npm run client \""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}
