@@ -1,7 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Landing } from "./pages";
+
 function App() {
   return (
-    <h3>test</h3>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/landing"
+          element={<Landing />}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
