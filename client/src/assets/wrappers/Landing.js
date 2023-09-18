@@ -9,7 +9,7 @@ const Wrapper = styled.section`
   }
 
   button {
-    background-color: #FFD800;
+    background-color: #ffd800;
     font-size: 2.5em;
     padding-left: 20px;
     padding-right: 20px;
@@ -26,7 +26,7 @@ const Wrapper = styled.section`
   }
 
   .active-btn {
-    background-color: #FF6A00;
+    background-color: #ff6a00;
   }
 
   .buttons-container {
@@ -38,10 +38,24 @@ const Wrapper = styled.section`
     margin-top: 20px;
   }
 
+  .login-form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   input {
     font-size: 1.5em;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  @media (min-width: 700px) {
+    .logo {
+      max-width: 400px;
+      text-align: left;
+    }
   }
 `;
 
