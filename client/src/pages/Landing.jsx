@@ -1,8 +1,19 @@
 import Wrapper from "../assets/wrappers/Landing";
+import Logo from "../assets/keeper-v4-logo.png";
 
 const Landing = () => {
+  const initialState = {
+    name: "", 
+    
+    password: "",
+    
+  }
+
+
   return (
     <Wrapper>
+      <img src={Logo} className="logo"/>
+
       <div className="box">
         <div className="buttons-container">
           <button
@@ -20,20 +31,20 @@ const Landing = () => {
             Register
           </button>
         </div>
-        <form className="form-div">
-          <label htmlFor="login">Login</label>
+        <form className="login-form-div">
           <input
             type="text"
-            name="login"
+            name="email"
+            placeholder="email"
           />
           <br></br>
-          <label htmlFor="register">Register</label>
           <input
-            type="text"
-            name="register"
+            type="password"
+            name="password"
+            placeholder="password"
           />
           <br></br>
-          <button type="submit">Submit</button>
+          <button type="submit" className="btn">Submit</button>
         </form>
       </div>
     </Wrapper>
