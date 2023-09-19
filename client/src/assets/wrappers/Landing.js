@@ -56,12 +56,12 @@ const Wrapper = styled.section`
     background-color: white;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 768px) {
     text-align: left;
 
     .top-bg-bar {
       width: 100%vw;
-      height: 75px;
+      height: 55px;
       background-color: #DCD3FF;
       z-index: 1;
     }
