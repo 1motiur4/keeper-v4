@@ -20,24 +20,32 @@ const Landing = () => {
 
   return (
     <Wrapper>
-      <img
-        src={Logo}
-        className="logo"
-      />
+      <div className="top-bg-bar">
+        <img
+          src={Logo}
+          className="logo"
+        />
+      </div>
 
       <div className="box">
         <div className="buttons-container">
           <button
             type="button"
             name="login-btn"
-            className="login-btn"
+            className={`login-btn ${values.login ? "active-btn" : null}`}
+            onClick={() => {
+              setValues({ ...values, login: true });
+            }}
           >
             Login
           </button>
           <button
             type="button"
             name="register-btn"
-            className="register-btn"
+            className={`register-btn ${values.login ? null : "active-btn"}`}
+            onClick={() => {
+              setValues({ ...values, login: false });
+            }}
           >
             Register
           </button>
@@ -49,6 +57,7 @@ const Landing = () => {
             placeholder="First Name"
             value={values.firstName}
             onChange={handleChange}
+            hidden={values.login}
           />
           <input
             type="text"
@@ -56,18 +65,19 @@ const Landing = () => {
             placeholder="Last Name"
             value={values.lastName}
             onChange={handleChange}
+            hidden={values.login}
           />
           <input
             type="text"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={values.email}
             onChange={handleChange}
           />
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={values.password}
             onChange={handleChange}
           />

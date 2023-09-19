@@ -5,12 +5,12 @@ const Wrapper = styled.section`
 
   .logo {
     width: 100vw;
-    max-width: 600px;
+    max-width: 400px;
   }
 
   button {
     background-color: #ffd800;
-    font-size: 2.5em;
+    font-size: 1.5em;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -30,7 +30,9 @@ const Wrapper = styled.section`
   }
 
   .buttons-container {
+    text-align: center;
     padding-bottom: 20px;
+    padding-top: 20px;
   }
 
   .btn {
@@ -45,16 +47,27 @@ const Wrapper = styled.section`
   }
 
   input {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
+    max-width: 400px;
+    width: 80%vw;
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
+    background-color: white;
   }
 
   @media (min-width: 700px) {
+    text-align: left;
+
+    .top-bg-bar {
+      width: 100%vw;
+      height: 75px;
+      background-color: #DCD3FF;
+      z-index: 1;
+    }
+
     .logo {
-      max-width: 400px;
-      text-align: left;
+      max-width: 300px;
     }
   }
 `;
