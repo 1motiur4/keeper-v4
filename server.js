@@ -3,6 +3,9 @@ const app = express();
 import dotenv from "dotenv";
 dotenv.config();
 
+//db and authenticate user
+import connectDB from "./db/connect.js";
+
 //routers
 import authRouter from "./routers/authRouter.js";
 
@@ -17,6 +20,15 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGODB_URL);
+    app.listen(5000, () => {
+      console.log(`Server is listening on port ${5000}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
