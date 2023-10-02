@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 import dotenv from "dotenv";
+import "express-async-errors"
 dotenv.config();
 
 //db and authenticate user
