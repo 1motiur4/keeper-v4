@@ -40,4 +40,9 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch;
+};
+
 export default mongoose.model("User", UserSchema);
