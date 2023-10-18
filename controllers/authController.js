@@ -40,7 +40,9 @@ export const login = async (req, res) => {
     return res.status(400).json({ msg: "You call that an email address?" });
   }
 
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email: req.body.email }).select(
+    "+password"
+  );
   if (!user) {
     return res.status(401).json({ msg: "Are you sure you're a user?" });
   }
