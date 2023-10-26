@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import { hashPassword } from "../utils/passwordUtils.js";
 import validator from "validator";
+import { createJWT } from "../utils/tokenUtils.js";
 
 export const register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -54,5 +55,8 @@ export const login = async (req, res) => {
     return res.status(401).json({ msg: "Damn you forgot your password?" });
   }
 
-  return res.status(200).json({ msg: "Logged in woohoo" });
+  const token = createJWT({ userId: user._id });
+
+  // return res.status(200).json({ msg: "Logged in woohoo" });
+  res.json({ token });
 };
