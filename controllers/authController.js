@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { hashPassword } from "../utils/passwordUtils.js";
+// import { hashPassword } from "../utils/passwordUtils.js";
 import validator from "validator";
 import { createJWT } from "../utils/tokenUtils.js";
 
@@ -8,20 +8,18 @@ export const register = async (req, res) => {
 
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({ msg: "Please provide all values!" });
-    // throw new Error("Please provide all values");
   }
 
-  const hashedPassword = await hashPassword(req.body.password);
-  req.body.password = hashedPassword;
+  // const hashedPassword = await hashPassword(req.body.password);
+  // req.body.password = hashedPassword;
 
   const userAlreadyExists = await User.findOne({ email });
   if (userAlreadyExists) {
     return res.status(400).json({ msg: "Email already in use!" });
-    // throw new Error("E-mail already in use!")
   }
 
   const user = await User.create(req.body);
-  return res.status(200).json({ msg: "User created!" });
+  return res.status(200).json({ msg: "User created!", user });
 };
 
 export const login = async (req, res) => {
@@ -48,15 +46,20 @@ export const login = async (req, res) => {
     return res.status(401).json({ msg: "Are you sure you're a user?" });
   }
 
-  console.log(user);
   const isPasswordCorrect = await user.comparePassword(password);
 
   if (!isPasswordCorrect) {
-    return res.status(401).json({ msg: "Damn you forgot your password?" });
+    return res.status(401).json({msg: "Damn you forgot your password?" });
   }
 
   const token = createJWT({ userId: user._id });
 
-  // return res.status(200).json({ msg: "Logged in woohoo" });
-  res.json({ token });
+  const threeDays = 1000 * 60 * 60 * 24 * 3;
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + threeDays),
+    secure: process.env.NODE_ENV === "production",
+  });
+  res.status(200).json({ user, token });
 };

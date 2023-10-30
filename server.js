@@ -1,15 +1,19 @@
 import express from "express";
 const app = express();
 import dotenv from "dotenv";
-import "express-async-errors"
+import "express-async-errors";
 dotenv.config();
+import cookieParser from "cookie-parser";
 
 //db and authenticate user
 import connectDB from "./db/connect.js";
 
 //routers
-import authRouter from "./routers/authRouter.js";
+import authRouter from "./routes/authRouter.js";
+import notesRouter from "./routes/notesRouter.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -20,6 +24,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/notes", authenticateUser, notesRouter);
 
 const start = async () => {
   try {
