@@ -10,9 +10,6 @@ export const register = async (req, res) => {
     return res.status(400).json({ msg: "Please provide all values!" });
   }
 
-  // const hashedPassword = await hashPassword(req.body.password);
-  // req.body.password = hashedPassword;
-
   const userAlreadyExists = await User.findOne({ email });
   if (userAlreadyExists) {
     return res.status(400).json({ msg: "Email already in use!" });
