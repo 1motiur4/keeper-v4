@@ -11,6 +11,7 @@ import connectDB from "./db/connect.js";
 //routers
 import authRouter from "./routes/authRouter.js";
 import notesRouter from "./routes/notesRouter.js";
+import userRouter from "./routes/userRouter.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
 
 app.use(cookieParser());
@@ -25,6 +26,7 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/notes", authenticateUser, notesRouter);
+app.use("/api/v1/user", authenticateUser, userRouter);
 
 const start = async () => {
   try {

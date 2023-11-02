@@ -46,7 +46,7 @@ export const login = async (req, res) => {
   const isPasswordCorrect = await user.comparePassword(password);
 
   if (!isPasswordCorrect) {
-    return res.status(401).json({msg: "Damn you forgot your password?" });
+    return res.status(401).json({ msg: "Damn you forgot your password?" });
   }
 
   const token = createJWT({ userId: user._id });
@@ -59,4 +59,13 @@ export const login = async (req, res) => {
     secure: process.env.NODE_ENV === "production",
   });
   res.status(200).json({ user, token });
+};
+
+export const logout = (req, res) => {
+  res.cookie("token", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+
+  res.status(200).json({ msg: "user logged out" });
 };
