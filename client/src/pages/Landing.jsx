@@ -1,6 +1,7 @@
 import Wrapper from "../assets/wrappers/Landing";
 import Logo from "../assets/keeper-v4-logo.png";
 import { useState } from "react";
+import { Form } from "react-router-dom";
 
 const initialState = {
   firstName: "",
@@ -50,7 +51,7 @@ const Landing = () => {
             Register
           </button>
         </div>
-        <form className="login-form-div">
+        <Form method="post" className="login-form-div">
           <input
             type="text"
             name="firstName"
@@ -87,7 +88,7 @@ const Landing = () => {
           >
             Submit
           </button>
-        </form>
+        </Form>
       </div>
     </Wrapper>
   );

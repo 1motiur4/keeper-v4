@@ -5,10 +5,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
+    action: () => {
+      console.log("test");
+      return null;
+    }
   },
   {
     path: "/landing",
     element: <Landing />,
+    action: () => {
+      console.log("test");
+      return null;
+    }
   },
   {
     path: "*",

@@ -20,8 +20,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send({ msg: "Welcome!" });
 });
-app.get("/api/v1", (req, res) => {
-  res.json({ msg: "API" });
+app.get("/api/v1/test", (req, res) => {
+  res.json({ msg: "test route API" });
 });
 
 app.use("/api/v1/auth", authRouter);

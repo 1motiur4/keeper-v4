@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-// import { hashPassword } from "../utils/passwordUtils.js";
 import validator from "validator";
 import { createJWT } from "../utils/tokenUtils.js";
 
