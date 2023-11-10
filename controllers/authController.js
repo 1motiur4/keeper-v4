@@ -50,13 +50,13 @@ export const login = async (req, res) => {
 
   const token = createJWT({ userId: user._id });
 
-  const threeDays = 1000 * 60 * 60 * 24 * 3;
+  // const threeDays = 1000 * 60 * 60 * 24 * 3;
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    expires: new Date(Date.now() + threeDays),
-    secure: process.env.NODE_ENV === "production",
-  });
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   expires: new Date(Date.now() + threeDays),
+  //   secure: process.env.NODE_ENV === "production",
+  // });
   res.status(200).json({ user, token });
 };
 
