@@ -12,7 +12,10 @@ import connectDB from "./db/connect.js";
 import authRouter from "./routes/authRouter.js";
 import notesRouter from "./routes/notesRouter.js";
 import userRouter from "./routes/userRouter.js";
+
+//middleware
 import { authenticateUser } from "./middleware/authMiddleware.js";
+import bearerMiddleware from "./middleware/bearerMiddlewear.js";
 
 app.use(cookieParser());
 app.use(express.json());
@@ -25,8 +28,8 @@ app.get("/api/v1/test", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/notes", authenticateUser, notesRouter);
-app.use("/api/v1/user", authenticateUser, userRouter);
+app.use("/api/v1/notes", bearerMiddleware, notesRouter);
+app.use("/api/v1/user", bearerMiddleware, userRouter);
 
 const start = async () => {
   try {

@@ -1,6 +1,8 @@
 import Wrapper from "../assets/wrappers/Landing";
 import Logo from "../assets/keeper-v4-logo.png";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../features/userSlice";
 
 const initialState = {
   firstName: "",
@@ -12,10 +14,23 @@ const initialState = {
 
 const Landing = () => {
   const [values, setValues] = useState(initialState);
+  const { user, isLoading } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { firstName, lastName, email, password } = values;
+
+    if (values.login) {
+      dispatch(loginUser({ email, password }));
+    } else {
+      // dispatch(registerUser({ name, email, password }));
+    }
   };
 
   return (
@@ -50,7 +65,10 @@ const Landing = () => {
             Register
           </button>
         </div>
-        <form className="login-form-div">
+        <form
+          className="login-form-div"
+          onSubmit={handleSubmit}
+        >
           <input
             type="text"
             name="firstName"
