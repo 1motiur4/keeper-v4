@@ -1,32 +1,35 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Landing, Error, Notes, Profile } from "./pages";
+import { Landing, Error, Notes, Profile, ProtectedRoute } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SharedLayout from "./pages/SharedLayout";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Landing />,
-    action: () => {
-      console.log("test");
-      return null;
-    },
-  },
   {
     path: "/landing",
     element: <Landing />,
   },
   {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <SharedLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/notes",
+        element: <Notes />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
     path: "*",
     element: <Error />,
-  },
-  {
-    path: "/notes",
-    element: <Notes />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
   },
 ]);
 
