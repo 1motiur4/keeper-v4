@@ -2,7 +2,7 @@ import Wrapper from "../assets/wrappers/Landing";
 import Logo from "../assets/keeper-v4-logo.png";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../features/userSlice";
+import { loginUser, registerUser } from "../features/userSlice";
 
 const initialState = {
   firstName: "",
@@ -29,7 +29,7 @@ const Landing = () => {
     if (values.login) {
       dispatch(loginUser({ email, password }));
     } else {
-      // dispatch(registerUser({ name, email, password }));
+      dispatch(registerUser({ firstName, lastName, email, password }));
     }
   };
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import customFetch from "../utils/customFetch";
+import { toast } from "react-toastify";
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
@@ -34,6 +34,19 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const registerUser = createAsyncThunk(
+  "user/registerUser",
+  async (user, thunkAPI) => {
+    try {
+      const resp = await customFetch.post("/auth/register", user);
+      console.log("log from registerUser createAsyncThunk");
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -54,14 +67,29 @@ const userSlice = createSlice({
         const { user, token } = action.payload;
         state.user = user;
         state.token = token;
-        addUserToLocalStorage({ user, token, location });
-        // toast.success(`Hey there ${user.name}`);
+        addUserToLocalStorage({ user, token });
+        toast.success(`Hey there ${user.firstName}`);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        // toast.error(action.payload);
-        // console.log(action.payload)
+        toast.error(action.payload);
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { user, token } = action.payload;
+        state.user = user;
+        state.token = token;
+        addUserToLocalStorage({ user, token });
+        toast.success(`Welcome aboard, ${user.firstName}!`);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
       });
+
   },
 });
 
