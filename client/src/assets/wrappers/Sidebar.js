@@ -1,40 +1,75 @@
 import styled from "styled-components";
 
 const Wrapper = styled.nav`
-  @media (max-width: 786px) {
-    .sidebar-container {
+  @media (width <= 786px) {
+    .logo {
+      width: 65vw;
+      max-width: 400px;
+      height: auto;
+    }
+
+    .logo-container {
+      margin: auto;
+    }
+
+    .top-bg-bar {
+      /* text-align: center; */
+      display: flex;
+      width: 100%vw;
+      height: auto;
+      background-color: #dcd3ff;
       z-index: 1;
-      background: var(--white);
-      min-height: 100vh;
+    }
+
+    .sidebar {
       height: 100%;
-      width: 250px;
-      /* margin-left: -250px; */
-      transition: var(--transition);
+      overflow: auto;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background-color: white;
+      min-width: 250px;
+      width: 50%;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.5);
+      transition: 0.3s ease-in-out all;
+      padding: 20px;
+    }
+
+    .sidebar-closed {
+      min-width: 0;
+      width: 0;
+      padding: 0px;
+    }
+
+    /* .sidebar-button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      background: black;
+      margin: 20px;
+      cursor: pointer;
+    } */
+
+    .sidebar-button {
+      background-color: transparent;
+      width: auto;
+      height: auto;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .menu-icon {
+      width: 50px;
+      height: 50px;
+      outline: none;
+      background-color: transparent;
     }
   }
 `;
-
-// const Wrapper = styled.nav`
-//   .sidebar {
-//     height: 100%;
-//     width: 150px;
-//     position: relative;
-//     left: 0;
-//     top: 0;
-//     padding-top: 40px;
-//     background-color: lightblue;
-//   }
-
-//   .sidebar div {
-//     padding: 8px;
-//     font-size: 24px;
-//     display: block;
-//   }
-
-//   .body-text {
-//     margin-left: 150px;
-//     font-size: 18px;
-//   }
-// `;
 
 export default Wrapper;

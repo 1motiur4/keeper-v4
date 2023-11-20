@@ -7,6 +7,7 @@ const user = localStorage.getItem("user");
 
 const initialState = {
   isLoading: false,
+  isSidebarOpen: false,
   user: user ? JSON.parse(user) : null,
   token: token,
 };
@@ -56,6 +57,9 @@ const userSlice = createSlice({
       removeUserFromLocalStorage();
       return { initialState };
     },
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,8 +93,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         toast.error(action.payload);
       });
-
   },
 });
 
+export const { logoutUser, toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;

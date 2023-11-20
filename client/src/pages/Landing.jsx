@@ -3,7 +3,6 @@ import Logo from "../assets/keeper-v4-logo.png";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../features/userSlice";
-import { Outlet } from "react-router-dom";
 
 const initialState = {
   firstName: "",

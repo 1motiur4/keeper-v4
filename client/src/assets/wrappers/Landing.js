@@ -56,7 +56,7 @@ const Wrapper = styled.section`
     background-color: white;
   }
 
-  @media (min-width: 768px) {
+  @media (width <= 786px) {
     text-align: left;
 
     .top-bg-bar {
